@@ -1,0 +1,126 @@
+Disaster Basics
+What is a disaster?
+What are the types of disasters?
+What is a natural disaster?
+What is a human-made disaster?
+Can disasters be predicted?
+What are the most common natural disasters?
+What are the most common human-made disasters?
+How are disasters classified?
+What is the difference between a hazard and a disaster?
+What are the impacts of disasters?
+What is disaster risk reduction?
+What is the role of technology in disaster management?
+What is the definition of a catastrophic disaster?
+What is the difference between a disaster and an emergency?
+What is disaster recovery?
+What is disaster preparedness?
+What is disaster resilience?
+What is disaster mitigation?
+What is a global disaster?
+What is an environmental disaster?
+Tweet Analysis
+How can tweets help in disaster analysis?
+How can I identify locations in a tweet?
+What are disaster keywords?
+How are disaster keywords extracted?
+What are the steps for analyzing a disaster tweet?
+How does text preprocessing help in tweet analysis?
+How can I detect a disaster-related tweet?
+What is the role of machine learning in tweet analysis?
+How accurate is tweet-based disaster prediction?
+What tools are used for analyzing tweets?
+What is named entity recognition (NER)?
+What is the role of NER in location extraction?
+What are some examples of disaster keywords?
+What is sentiment analysis?
+How does sentiment analysis work?
+What are the main components of sentiment analysis?
+What is polarity in sentiment analysis?
+What are the challenges of analyzing disaster tweets?
+How can I extract hashtags from tweets?
+How are emotions identified in tweets?
+Model Predictions
+What does "is_disaster" mean in the output?
+How is the "is_disaster" prediction made?
+What does the "category" output represent?
+What are the possible categories of a disaster?
+How does the model identify the disaster category?
+What does the "sentiment" output indicate?
+What are the different sentiment categories?
+How is the sentiment score calculated?
+How accurate are the model's predictions?
+What is the role of a scaler in the model?
+How does vectorization help in text classification?
+What is the purpose of a trained model in disaster analysis?
+What is the confidence level of the predictions?
+Can the model handle multilingual tweets?
+What happens if a tweet is unrelated to disasters?
+How does the model handle ambiguous tweets?
+Can the model identify fake disaster tweets?
+What happens if no disaster keywords are found?
+Can the model predict multiple disasters in one tweet?
+How can the model be improved?
+Locations in Tweets
+How are locations extracted from tweets?
+What is a geotag in a tweet?
+Can tweets without explicit locations be analyzed?
+What tools are used for extracting locations?
+How reliable are location extraction methods?
+Can locations be extracted from abbreviations?
+What happens if multiple locations are mentioned in a tweet?
+Can country names be identified in tweets?
+How does the model handle spelling errors in locations?
+What is the role of regex in location extraction?
+What are some examples of location patterns?
+Can the model identify locations in non-English tweets?
+What is the difference between GPE and LOC entities?
+How does spaCy identify location entities?
+How are patterns defined for regex-based location extraction?
+What are the challenges in location extraction?
+Can a tweet without a location still be useful?
+How does context affect location extraction?
+What is the impact of location data on disaster response?
+How can location data be validated?
+Disaster Categories
+What are the main categories of disasters?
+How are disaster categories defined?
+What is an earthquake disaster?
+What is a flood disaster?
+What is a wildfire disaster?
+What is a hurricane disaster?
+What is a landslide disaster?
+What is a tsunami disaster?
+What is a tornado disaster?
+What is a drought disaster?
+How are categories assigned to tweets?
+What happens if a tweet mentions multiple disasters?
+Can a disaster tweet belong to no category?
+How specific are disaster categories?
+What is a blizzard disaster?
+What is an avalanche disaster?
+What is a chemical spill disaster?
+What is a nuclear accident?
+What is a pandemic disaster?
+How can disaster categories help in emergency response?
+General Queries
+How can I use this tool for disaster analysis?
+What is the role of machine learning in disaster prediction?
+What datasets are used for training the model?
+Can the model predict future disasters?
+What is the role of Twitter in disaster management?
+Can the model detect sarcasm in tweets?
+How can I report a disaster using social media?
+What is the significance of disaster-related hashtags?
+How does preprocessing improve model accuracy?
+What is the importance of real-time disaster detection?
+How do governments use disaster-related tweets?
+Can images or videos in tweets be analyzed?
+How are non-disaster tweets filtered out?
+What is the role of disaster keywords in the model?
+How are tweets categorized into disaster or non-disaster?
+Can the model analyze historical tweets?
+How is public sentiment affected during disasters?
+What is the role of AI in disaster management?
+How can disaster analysis save lives?
+What is the significance of disaster response time?

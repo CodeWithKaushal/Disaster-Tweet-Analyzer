@@ -1,0 +1,50 @@
+/* Global Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #0a1a3a; /* Dark blue background to match the theme */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: whitesmoke;
+}
+
+/* Container Styling */
+.container {
+    text-align: center;
+    padding: 20px 40px;
+    background-color: #1e2a47; /* Slate blue for the container background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Darker shadow for depth */
+    border-radius: 8px;
+}
+
+/* Heading Styling */
+h1 {
+    color: #ffcc00; /* Gold yellow for the heading */
+    margin-bottom: 10px;
+}
+
+/* Text Styling */
+p {
+    font-size: 18px;
+    color: #d1d1e0; /* Light gray for readability */
+    margin-bottom: 20px;
+}
+
+/* Button Styling */
+button {
+    background-color: #ffcc00; /* Gold yellow for button */
+    color: #0a1a3a; /* Dark blue text for contrast */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #e6b800; /* Slightly darker gold for hover effect */
+}

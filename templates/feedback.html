@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Feedback Form</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+  <div class='fb-form'>
+    <form action="/submitted_feedback" method="POST" class='form-group'>
+      <h2>Tell us what you think</h2>
+      <input class='form-control' placeholder='Name' type='text'>
+      <input class='form-control' placeholder='Email' type='text'>
+      <textarea class='form-control' id='fb-comment' name='' placeholder='Tell us what you think'></textarea>
+      <div class='rating'>
+        <i class='fa fa-star'></i>
+        <i class='fa fa-star'></i>
+        <i class='fa fa-star'></i>
+        <i class='fa fa-star'></i>
+        <i class='fa fa-star'></i>
+      </div>
+      <input class='form-control btn btn-primary' type='submit'>
+    </form>
+  </div>
+  <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+  <script src="static/js/script.js"></script>
+</body>
+</html>

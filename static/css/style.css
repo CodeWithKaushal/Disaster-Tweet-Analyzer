@@ -1,0 +1,118 @@
+@import 'https://fonts.googleapis.com/css?family=Montserrat';
+html, body {
+  height: 100%;
+  width: 100%;
+  background-color: #0a1a3a; /* Dark blue background to match the theme */
+  overflow: hidden;
+  color: whitesmoke;
+  font-family: "Montserrat", sans-serif;
+}
+
+.fb-form {
+  width: 300px;
+  top: 50%;
+  left: 50%;
+  position: relative;
+  transform: translateY(-50%) translateX(-50%);
+}
+
+.fb-form h2 {
+  text-align: center;
+  font-size: 1.4em;
+  color: #ffcc00; /* Gold yellow for the heading */
+}
+
+.fb-form input {
+  margin: 15px 0;
+  color: #d1d1e0; /* Light gray for text input */
+  background-color: #1e2a47; /* Slate blue for input fields */
+  border: 1px solid #ffcc00; /* Gold yellow border */
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.fb-form input[type=submit] {
+  margin-top: 0;
+  background-color: #ffcc00; /* Gold yellow for submit button */
+  color: #0a1a3a; /* Dark blue text for contrast */
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.fb-form input[type=submit]:hover {
+  background-color: #e6b800; /* Slightly darker gold for hover effect */
+}
+
+.fb-form textarea {
+  height: 100px;
+  color: #d1d1e0; /* Light gray for text area */
+  background-color: #1e2a47; /* Slate blue for text area */
+  border: 1px solid #ffcc00; /* Gold yellow border */
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.rating {
+  margin: 15px auto;
+  transform: rotateY(180deg);
+  width: 100%;
+}
+
+.rating .fa-star {
+  font-size: 2em;
+  cursor: pointer;
+  margin: 0 5.1%;
+  color: #d1d1e0; /* Light gray for stars initially */
+  transition: all 0.5s ease;
+}
+
+.rating .fa-star.active-rating {
+  color: #ffcc00; /* Gold yellow for active rating stars */
+  transition: all 0.5s ease;
+  -webkit-animation: rating-highlight 0.5s ease forwards;
+          animation: rating-highlight 0.5s ease forwards;
+}
+
+.rating .fa-star:hover,
+.rating .fa-star.active-rating ~ .fa-star {
+  color: #ffcc00; /* Gold yellow for hover and subsequent stars */
+}
+
+@-webkit-keyframes rating-highlight {
+  0% {
+    transform: rotate(-10deg) scale(1.2);
+  }
+  20% {
+    transform: rotate(10deg) scale(0.8);
+  }
+  50% {
+    transform: rotate(-5deg) scale(1.1);
+  }
+  80% {
+    transform: rotate(5deg) scale(0.9);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+@keyframes rating-highlight {
+  0% {
+    transform: rotate(-10deg) scale(1.2);
+  }
+  20% {
+    transform: rotate(10deg) scale(0.8);
+  }
+  50% {
+    transform: rotate(-5deg) scale(1.1);
+  }
+  80% {
+    transform: rotate(5deg) scale(0.9);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+}
