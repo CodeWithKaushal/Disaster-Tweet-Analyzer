@@ -5,4 +5,4 @@ pandas==2.2.3
 spacy==3.7.6
 torch==2.5.1
 transformers==4.46.0
-unicorn
+gunicorn
