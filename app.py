@@ -7,10 +7,17 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import re
 
 app = Flask(__name__)
- 
+
 # Load models and libraries
-nlp = spacy.load("en_core_web_sm")
+try:
+    nlp = spacy.load("en_core_web_sm")
+except OSError:
+    from spacy.cli import download
+    download("en_core_web_sm")
+    nlp = spacy.load("en_core_web_sm")
+
 sia = SentimentIntensityAnalyzer()
+
 def extract_locations(tweet):
     # spaCy entity recognition
     doc = nlp(tweet)
@@ -28,6 +35,7 @@ def extract_locations(tweet):
         locations.extend(regex_locations)
  
     return list(set(locations))  # Remove duplicates
+
 # Define disaster keywords
 disaster_keywords = {
     # Natural Disasters
@@ -109,6 +117,7 @@ disaster_keywords = {
 'smog warning': ['smog warning', 'air pollution alert', 'haze warning'],
 'fog warning': ['fog warning', 'fog alert', 'thick fog warning']
 }
+
 def predict_tweet(tweet):
     # Load models
     lr_model = pickle.load(open('lr_model.pkl', 'rb'))
