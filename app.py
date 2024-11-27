@@ -5,12 +5,19 @@ import pickle
 import spacy
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import re
+import subprocess
 
 app = Flask(__name__)
- 
-# Load models and libraries
-nlp = spacy.load("en_core_web_sm")
+
+# Ensure the spaCy model is downloaded
+try:
+    nlp = spacy.load("en_core_web_sm")
+except OSError:
+    subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"], check=True)
+    nlp = spacy.load("en_core_web_sm")
+
 sia = SentimentIntensityAnalyzer()
+
 def extract_locations(tweet):
     # spaCy entity recognition
     doc = nlp(tweet)
