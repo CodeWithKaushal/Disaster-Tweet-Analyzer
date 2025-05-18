@@ -1,1 +1,1 @@
-web: gunicorn app:app
+web: gunicorn "disaster_app:create_app()"
