@@ -1,0 +1,821 @@
+{% extends "django_base.html" %} {% load static %} {% block title %}Disaster
+Tweet Analyzer - AI-Powered Disaster Detection{% endblock %} {% block custom_css
+%}
+<style>
+  /* Hero section */
+  .hero-section {
+    background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.8),
+        rgba(0, 0, 0, 0.6)
+      ),
+      url('{% static "images/image1.jpg" %}');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 150px 0 100px;
+    margin-top: -76px;
+  }
+
+  .hero-content {
+    max-width: 700px;
+  }
+
+  .hero-title {
+    font-weight: 700;
+    font-size: 3rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Tweet analyzer section */
+  .analyzer-section {
+    padding: 100px 0;
+    background-color: #f8f9fa;
+  }
+
+  .analyzer-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .analyzer-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .tweet-input {
+    padding: 15px 20px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .tweet-input:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  }
+
+  /* Result sections */
+  .result-container {
+    display: none;
+    margin-top: 30px;
+  }
+
+  .result-heading {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #343a40;
+  }
+
+  .result-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+  }
+
+  .result-card:hover {
+    transform: translateY(-5px);
+  }
+
+  /* Features section */
+  .features-section {
+    padding: 100px 0;
+  }
+
+  .feature-card {
+    padding: 30px;
+    border-radius: 15px;
+    height: 100%;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: white;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .feature-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #0d6efd;
+  }
+
+  /* Stats section */
+  .stats-section {
+    background: linear-gradient(to right, #0062e6, #33aeff);
+    color: white;
+    padding: 80px 0;
+  }
+
+  .stat-card {
+    text-align: center;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-10px);
+  }
+
+  .stat-number {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  /* CTA section */
+  .cta-section {
+    background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.7),
+        rgba(0, 0, 0, 0.5)
+      ),
+      url('{% static "images/image3.jpg" %}');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 100px 0;
+    text-align: center;
+  }
+
+  .btn-glow {
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 123, 255, 0.5);
+    transition: all 0.3s ease;
+  }
+
+  .btn-glow:hover {
+    box-shadow: 0 0 30px rgba(0, 123, 255, 0.8);
+  }
+
+  .btn-glow::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0)
+    );
+    transform: rotate(30deg);
+    transition: all 0.5s;
+  }
+
+  .btn-glow:hover::after {
+    left: 100%;
+  }
+
+  /* Progress bar styling */
+  .progress {
+    height: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+</style>
+{% endblock %} {% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="container">
+    <div class="row">
+      <div
+        class="col-lg-8 mx-auto hero-content text-center animate__animated animate__fadeIn"
+      >
+        <h1
+          class="hero-title animate__animated animate__fadeInUp animate__delay-1s"
+        >
+          AI-Powered Disaster Tweet Detection
+        </h1>
+        <p
+          class="lead mb-4 animate__animated animate__fadeInUp animate__delay-2s"
+        >
+          Our advanced machine learning model helps identify disaster situations
+          in real-time by analyzing tweets and social media posts.
+        </p>
+        <div
+          class="d-flex justify-content-center gap-3 animate__animated animate__fadeInUp animate__delay-3s"
+        >
+          <a
+            href="#analyzer"
+            class="btn btn-primary btn-lg px-4 py-3 rounded-pill"
+            >Try it now</a
+          >
+          <a
+            href="{% url 'model-insight' %}"
+            class="btn btn-outline-light btn-lg px-4 py-3 rounded-pill"
+            >Learn how it works</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tweet Analyzer Section -->
+<section id="analyzer" class="analyzer-section">
+  <div class="container">
+    <div class="row justify-content-center text-center mb-5">
+      <div class="col-lg-8" data-aos="fade-up">
+        <h2 class="display-5 fw-bold mb-3">Analyze Any Tweet</h2>
+        <p class="lead text-muted">
+          Enter any tweet or social media post to analyze whether it's about a
+          disaster situation. Our AI model will predict if it's a real disaster
+          and provide additional insights.
+        </p>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+        <div class="analyzer-card">
+          <div class="mb-4">
+            <label for="tweetInput" class="form-label fs-5 fw-bold"
+              >Tweet Text</label
+            >
+            <textarea
+              id="tweetInput"
+              class="form-control tweet-input"
+              rows="4"
+              placeholder="Enter tweet text here..."
+            ></textarea>
+          </div>
+          <div class="d-grid gap-2">
+            <button id="analyzeBtn" class="btn btn-primary py-3 rounded-pill">
+              <i class="fas fa-bolt me-2"></i>Analyze Tweet
+            </button>
+          </div>
+
+          <!-- Loading spinner -->
+          <div id="loadingSpinner" class="text-center mt-4 d-none">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2">Analyzing tweet...</p>
+          </div>
+
+          <!-- Results Container -->
+          <div id="resultsContainer" class="result-container">
+            <h3 class="result-heading">Analysis Results</h3>
+
+            <!-- Prediction Result -->
+            <div class="result-card mb-4" data-aos="fade-up">
+              <div class="d-flex align-items-center mb-3">
+                <div class="fs-2 me-3 text-primary">
+                  <i class="fas fa-check-circle" id="predictionIcon"></i>
+                </div>
+                <div>
+                  <h4 class="mb-0">Prediction</h4>
+                  <p class="text-muted mb-0">
+                    Is this tweet about a real disaster?
+                  </p>
+                </div>
+              </div>
+              <div class="p-3 rounded-3 bg-light">
+                <div
+                  class="d-flex justify-content-between align-items-center mb-2"
+                >
+                  <span class="fw-bold" id="predictionResult">Disaster</span>
+                  <span
+                    class="badge bg-primary rounded-pill"
+                    id="predictionConfidence"
+                    >95% confidence</span
+                  >
+                </div>
+                <div class="progress">
+                  <div
+                    id="predictionProgressBar"
+                    class="progress-bar progress-bar-striped progress-bar-animated"
+                    role="progressbar"
+                    style="width: 75%"
+                  ></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sentiment Analysis -->
+            <div
+              class="result-card mb-4"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <div class="d-flex align-items-center mb-3">
+                <div class="fs-2 me-3 text-primary">
+                  <i class="fas fa-heart"></i>
+                </div>
+                <div>
+                  <h4 class="mb-0">Sentiment Analysis</h4>
+                  <p class="text-muted mb-0">Emotional tone of the tweet</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 mb-3 mb-md-0">
+                  <div class="p-3 rounded-3 bg-light text-center">
+                    <div class="mb-2">
+                      <i class="fas fa-smile text-success fs-3"></i>
+                    </div>
+                    <h5 class="mb-0">Positive</h5>
+                    <span id="positiveSentiment" class="fw-bold">25%</span>
+                  </div>
+                </div>
+                <div class="col-md-3 mb-3 mb-md-0">
+                  <div class="p-3 rounded-3 bg-light text-center">
+                    <div class="mb-2">
+                      <i class="fas fa-meh text-warning fs-3"></i>
+                    </div>
+                    <h5 class="mb-0">Neutral</h5>
+                    <span id="neutralSentiment" class="fw-bold">25%</span>
+                  </div>
+                </div>
+                <div class="col-md-3 mb-3 mb-md-0">
+                  <div class="p-3 rounded-3 bg-light text-center">
+                    <div class="mb-2">
+                      <i class="fas fa-frown text-danger fs-3"></i>
+                    </div>
+                    <h5 class="mb-0">Negative</h5>
+                    <span id="negativeSentiment" class="fw-bold">50%</span>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="p-3 rounded-3 bg-light text-center">
+                    <div class="mb-2">
+                      <i class="fas fa-balance-scale text-info fs-3"></i>
+                    </div>
+                    <h5 class="mb-0">Compound</h5>
+                    <span id="compoundSentiment" class="fw-bold">-0.25</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Disaster Types -->
+            <div
+              class="result-card mb-4"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <div class="d-flex align-items-center mb-3">
+                <div class="fs-2 me-3 text-primary">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div>
+                  <h4 class="mb-0">Disaster Types</h4>
+                  <p class="text-muted mb-0">Identified disaster categories</p>
+                </div>
+              </div>
+              <div id="disasterTypesContainer" class="p-3 rounded-3 bg-light">
+                <div id="noDisasterTypes" class="text-center py-3 text-muted">
+                  <i class="fas fa-info-circle me-2"></i>No specific disaster
+                  types detected
+                </div>
+                <div id="disasterTypesList" class="row g-3">
+                  <!-- Disaster types will be inserted here by JavaScript -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Locations -->
+            <div class="result-card" data-aos="fade-up" data-aos-delay="300">
+              <div class="d-flex align-items-center mb-3">
+                <div class="fs-2 me-3 text-primary">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div>
+                  <h4 class="mb-0">Locations</h4>
+                  <p class="text-muted mb-0">Potential locations mentioned</p>
+                </div>
+              </div>
+              <div id="locationsContainer" class="p-3 rounded-3 bg-light">
+                <div id="noLocations" class="text-center py-3 text-muted">
+                  <i class="fas fa-info-circle me-2"></i>No locations detected
+                </div>
+                <div id="locationsList">
+                  <!-- Locations will be inserted here by JavaScript -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section">
+  <div class="container">
+    <div class="row justify-content-center text-center mb-5">
+      <div class="col-lg-8" data-aos="fade-up">
+        <h2 class="display-5 fw-bold mb-3">Key Features</h2>
+        <p class="lead text-muted">
+          Our disaster tweet analyzer combines multiple advanced technologies to
+          provide accurate and insightful analysis.
+        </p>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4" data-aos="fade-up">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-robot"></i>
+          </div>
+          <h3 class="h4 mb-3">AI-Powered Analysis</h3>
+          <p class="text-muted mb-0">
+            Utilizes state-of-the-art machine learning models trained on
+            thousands of disaster-related tweets for accurate prediction.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-chart-pie"></i>
+          </div>
+          <h3 class="h4 mb-3">Sentiment Analysis</h3>
+          <p class="text-muted mb-0">
+            Analyzes the emotional tone of tweets to provide additional context
+            about the situation's severity and public reaction.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-tags"></i>
+          </div>
+          <h3 class="h4 mb-3">Disaster Classification</h3>
+          <p class="text-muted mb-0">
+            Identifies specific disaster types like earthquakes, floods, or
+            wildfires from tweet content for better categorization.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-map-marked-alt"></i>
+          </div>
+          <h3 class="h4 mb-3">Location Extraction</h3>
+          <p class="text-muted mb-0">
+            Automatically extracts geographic information from tweets to help
+            pinpoint affected areas and coordinate response efforts.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-bolt"></i>
+          </div>
+          <h3 class="h4 mb-3">Real-Time Processing</h3>
+          <p class="text-muted mb-0">
+            Process tweets in milliseconds, allowing for immediate analysis and
+            rapid response to emerging disaster situations.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-code"></i>
+          </div>
+          <h3 class="h4 mb-3">Open API Access</h3>
+          <p class="text-muted mb-0">
+            Easy integration with other systems and applications through our
+            developer-friendly API for extended functionality.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-3" data-aos="fade-up">
+        <div class="stat-card">
+          <i class="fas fa-database mb-3 fs-1"></i>
+          <div class="stat-number" data-count="10000">10,000+</div>
+          <p class="mb-0">Tweets Analyzed</p>
+        </div>
+      </div>
+
+      <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+        <div class="stat-card">
+          <i class="fas fa-check-circle mb-3 fs-1"></i>
+          <div class="stat-number" data-count="96">96%</div>
+          <p class="mb-0">Prediction Accuracy</p>
+        </div>
+      </div>
+
+      <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+        <div class="stat-card">
+          <i class="fas fa-globe mb-3 fs-1"></i>
+          <div class="stat-number" data-count="75">75+</div>
+          <p class="mb-0">Countries Covered</p>
+        </div>
+      </div>
+
+      <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+        <div class="stat-card">
+          <i class="fas fa-users mb-3 fs-1"></i>
+          <div class="stat-number" data-count="5000">5,000+</div>
+          <p class="mb-0">Users</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center" data-aos="fade-up">
+        <h2 class="display-5 fw-bold mb-4">Ready to Analyze Your Data?</h2>
+        <p class="lead mb-5">
+          Join thousands of users leveraging our AI-powered disaster detection
+          to make a difference. Get started today with our easy-to-use platform.
+        </p>
+        <a
+          href="#analyzer"
+          class="btn btn-primary btn-lg btn-glow px-5 py-3 rounded-pill"
+        >
+          <i class="fas fa-rocket me-2"></i>Get Started Now
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %} {% block custom_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const tweetInput = document.getElementById("tweetInput");
+    const analyzeBtn = document.getElementById("analyzeBtn");
+    const loadingSpinner = document.getElementById("loadingSpinner");
+    const resultsContainer = document.getElementById("resultsContainer");
+
+    // Stats counting animation
+    const stats = document.querySelectorAll(".stat-number");
+
+    const countUp = () => {
+      stats.forEach((stat) => {
+        const target = parseInt(stat.getAttribute("data-count"));
+        const count = +stat.innerText.replace(/,/g, "").replace(/\+/g, "");
+        const speed = 50;
+
+        if (count < target) {
+          stat.innerText =
+            Math.ceil(count + target / speed) +
+            (stat.innerText.includes("+") ? "+" : "");
+          setTimeout(countUp, 20);
+        } else {
+          stat.innerText =
+            target.toLocaleString() + (stat.innerText.includes("+") ? "+" : "");
+        }
+      });
+    };
+
+    // Trigger count up animation when stats section comes into view
+    const statsSection = document.querySelector(".stats-section");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            countUp();
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(statsSection);
+
+    // Analyze tweet
+    analyzeBtn.addEventListener("click", function () {
+      const tweet = tweetInput.value.trim();
+
+      if (!tweet) {
+        alert("Please enter a tweet to analyze");
+        return;
+      }
+
+      // Show loading spinner
+      loadingSpinner.classList.remove("d-none");
+      resultsContainer.style.display = "none";
+
+      // Make API request
+      fetch("/api/analyze-tweet/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ tweet: tweet }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // Hide loading spinner
+          loadingSpinner.classList.add("d-none");
+
+          // Update the UI with results
+          updateResults(data);
+
+          // Show results container
+          resultsContainer.style.display = "block";
+
+          // Scroll to results
+          resultsContainer.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          loadingSpinner.classList.add("d-none");
+          alert(
+            "An error occurred while analyzing the tweet. Please try again."
+          );
+        });
+    });
+
+    function updateResults(data) {
+      // Update prediction
+      const prediction = data.prediction.prediction;
+      const probability = (data.prediction.probability * 100).toFixed(2);
+
+      document.getElementById("predictionResult").textContent = prediction;
+      document.getElementById(
+        "predictionConfidence"
+      ).textContent = `${probability}% confidence`;
+      document.getElementById(
+        "predictionProgressBar"
+      ).style.width = `${probability}%`;
+
+      // Update icon
+      const predictionIcon = document.getElementById("predictionIcon");
+      if (prediction === "Disaster") {
+        predictionIcon.className = "fas fa-exclamation-circle text-danger";
+        document.getElementById("predictionProgressBar").className =
+          "progress-bar progress-bar-striped progress-bar-animated bg-danger";
+      } else {
+        predictionIcon.className = "fas fa-check-circle text-success";
+        document.getElementById("predictionProgressBar").className =
+          "progress-bar progress-bar-striped progress-bar-animated bg-success";
+      }
+
+      // Update sentiment
+      document.getElementById("positiveSentiment").textContent = `${(
+        data.sentiment.pos * 100
+      ).toFixed(2)}%`;
+      document.getElementById("neutralSentiment").textContent = `${(
+        data.sentiment.neu * 100
+      ).toFixed(2)}%`;
+      document.getElementById("negativeSentiment").textContent = `${(
+        data.sentiment.neg * 100
+      ).toFixed(2)}%`;
+      document.getElementById("compoundSentiment").textContent =
+        data.sentiment.compound.toFixed(2);
+
+      // Update disaster types
+      const disasterTypesContainer = document.getElementById(
+        "disasterTypesContainer"
+      );
+      const noDisasterTypes = document.getElementById("noDisasterTypes");
+      const disasterTypesList = document.getElementById("disasterTypesList");
+
+      disasterTypesList.innerHTML = "";
+
+      if (Object.keys(data.disaster_types).length === 0) {
+        noDisasterTypes.style.display = "block";
+        disasterTypesList.style.display = "none";
+      } else {
+        noDisasterTypes.style.display = "none";
+        disasterTypesList.style.display = "flex";
+
+        let disasterColors = {
+          earthquake: "danger",
+          flood: "primary",
+          hurricane: "warning",
+          wildfire: "danger",
+          tornado: "warning",
+          storm: "info",
+          tsunami: "primary",
+          drought: "warning",
+          landslide: "secondary",
+          "volcanic eruption": "danger",
+          explosion: "danger",
+          fire: "danger",
+          pandemic: "danger",
+          "chemical spill": "warning",
+          "oil spill": "dark",
+          "nuclear accident": "danger",
+          "plane crash": "dark",
+          "train derailment": "warning",
+          "mass shooting": "danger",
+          "terrorist attack": "danger",
+          "cyber attack": "info",
+          "food poisoning": "warning",
+          "water contamination": "info",
+        };
+
+        let iconMap = {
+          earthquake: "fa-house-crack",
+          flood: "fa-water",
+          hurricane: "fa-wind",
+          wildfire: "fa-fire",
+          tornado: "fa-tornado",
+          storm: "fa-cloud-bolt",
+          tsunami: "fa-water-rise",
+          drought: "fa-sun-plant-wilt",
+          landslide: "fa-mountain",
+          "volcanic eruption": "fa-volcano",
+          explosion: "fa-burst",
+          fire: "fa-fire",
+          pandemic: "fa-virus",
+          "chemical spill": "fa-biohazard",
+          "oil spill": "fa-oil-can",
+          "nuclear accident": "fa-radiation",
+          "plane crash": "fa-plane-crash",
+          "train derailment": "fa-train",
+          "mass shooting": "fa-gun",
+          "terrorist attack": "fa-explosion",
+          "cyber attack": "fa-shield-virus",
+          "food poisoning": "fa-utensils",
+          "water contamination": "fa-glass-water",
+        };
+
+        Object.entries(data.disaster_types).forEach(([type, keywords]) => {
+          const color = disasterColors[type] || "primary";
+          const icon = iconMap[type] || "fa-exclamation-triangle";
+
+          const disasterTypeDiv = document.createElement("div");
+          disasterTypeDiv.className = "col-md-6";
+          disasterTypeDiv.innerHTML = `
+                        <div class="p-3 bg-${color} bg-opacity-10 rounded-3 border border-${color} d-flex align-items-center">
+                            <i class="fas ${icon} text-${color} me-3"></i>
+                            <div>
+                                <h5 class="mb-1 text-capitalize">${type}</h5>
+                                <p class="mb-0 small">${keywords.join(", ")}</p>
+                            </div>
+                        </div>
+                    `;
+
+          disasterTypesList.appendChild(disasterTypeDiv);
+        });
+      }
+
+      // Update locations
+      const locationsContainer = document.getElementById("locationsContainer");
+      const noLocations = document.getElementById("noLocations");
+      const locationsList = document.getElementById("locationsList");
+
+      locationsList.innerHTML = "";
+
+      if (data.locations.length === 0) {
+        noLocations.style.display = "block";
+        locationsList.style.display = "none";
+      } else {
+        noLocations.style.display = "none";
+        locationsList.style.display = "block";
+
+        const locationsHTML = data.locations
+          .map(
+            (location) => `
+                    <span class="badge bg-info text-dark me-2 mb-2 p-2">
+                        <i class="fas fa-map-marker-alt me-1"></i> ${location}
+                    </span>
+                `
+          )
+          .join("");
+
+        locationsList.innerHTML = locationsHTML;
+      }
+    }
+  });
+</script>
+{% endblock %}

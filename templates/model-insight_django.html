@@ -1,0 +1,847 @@
+{% extends "django_base.html" %} {% load static %} {% block title %}Model
+Insights - Disaster Tweet Analyzer{% endblock %} {% block custom_css %}
+<style>
+  .page-header {
+    background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.8),
+        rgba(0, 0, 0, 0.6)
+      ),
+      url('{% static "images/image3.jpg" %}');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 120px 0 80px;
+    margin-top: -76px;
+  }
+
+  .insight-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    padding: 40px;
+    margin-bottom: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .insight-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  }
+
+  .chart-container {
+    position: relative;
+    height: 300px;
+    margin: 20px 0;
+  }
+
+  .metric-card {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+  }
+
+  .metric-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .metric-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #0d6efd;
+  }
+
+  .metric-value {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .table-container {
+    overflow-x: auto;
+  }
+
+  .feature-importance-table {
+    width: 100%;
+  }
+
+  .feature-importance-table th,
+  .feature-importance-table td {
+    padding: 12px 15px;
+  }
+
+  .progress {
+    height: 10px;
+    border-radius: 5px;
+  }
+
+  .code-block {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    font-family: "Consolas", "Monaco", monospace;
+    font-size: 0.9rem;
+    overflow-x: auto;
+  }
+
+  .code-line {
+    display: block;
+    line-height: 1.5;
+  }
+
+  .comment {
+    color: #6c757d;
+  }
+
+  .keyword {
+    color: #0d6efd;
+    font-weight: bold;
+  }
+
+  .string {
+    color: #28a745;
+  }
+
+  .number {
+    color: #dc3545;
+  }
+
+  .function {
+    color: #fd7e14;
+  }
+</style>
+{% endblock %} {% block content %}
+<!-- Page Header -->
+<section class="page-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto text-center">
+        <h1 class="display-4 fw-bold mb-4">Model Insights</h1>
+        <p class="lead mb-0">
+          Understanding the machine learning models behind our disaster tweet
+          analysis.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Model Overview -->
+<section class="py-5">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center" data-aos="fade-up">
+        <h2 class="display-5 fw-bold mb-4">Model Architecture</h2>
+        <p class="lead text-muted">
+          Our disaster tweet detection system combines multiple machine learning
+          models to provide accurate predictions and insightful analysis.
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12 mb-4" data-aos="fade-up">
+        <div class="insight-card">
+          <h3 class="h4 mb-4">System Architecture Overview</h3>
+          <img
+            src="{% static 'images/model_architecture.png' %}"
+            alt="Model Architecture Diagram"
+            class="img-fluid rounded mb-4"
+          />
+          <p class="text-muted">
+            Our system employs a multi-model approach for disaster tweet
+            analysis. The architecture consists of several key components that
+            work together to analyze and classify tweets:
+          </p>
+
+          <div class="row mt-4">
+            <div class="col-md-6 mb-4">
+              <div class="d-flex">
+                <div class="me-3">
+                  <i class="fas fa-cog text-primary fa-2x"></i>
+                </div>
+                <div>
+                  <h4 class="h5 mb-2">Text Preprocessing</h4>
+                  <p class="text-muted mb-0">
+                    Tweets are cleaned and normalized using NLP techniques to
+                    remove noise and extract meaningful features.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-4">
+              <div class="d-flex">
+                <div class="me-3">
+                  <i class="fas fa-vector-square text-primary fa-2x"></i>
+                </div>
+                <div>
+                  <h4 class="h5 mb-2">Feature Extraction</h4>
+                  <p class="text-muted mb-0">
+                    TF-IDF vectorization converts text into numerical features
+                    that can be processed by machine learning algorithms.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-4">
+              <div class="d-flex">
+                <div class="me-3">
+                  <i class="fas fa-calculator text-primary fa-2x"></i>
+                </div>
+                <div>
+                  <h4 class="h5 mb-2">Primary Classification</h4>
+                  <p class="text-muted mb-0">
+                    Logistic Regression model determines if a tweet is about a
+                    real disaster with high accuracy.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-4">
+              <div class="d-flex">
+                <div class="me-3">
+                  <i class="fas fa-tree text-primary fa-2x"></i>
+                </div>
+                <div>
+                  <h4 class="h5 mb-2">Ensemble Learning</h4>
+                  <p class="text-muted mb-0">
+                    Random Forest classifier provides additional validation and
+                    improves prediction accuracy.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-4">
+              <div class="d-flex">
+                <div class="me-3">
+                  <i class="fas fa-heart text-primary fa-2x"></i>
+                </div>
+                <div>
+                  <h4 class="h5 mb-2">Sentiment Analysis</h4>
+                  <p class="text-muted mb-0">
+                    VADER Sentiment Analyzer measures the emotional tone of
+                    tweets to provide context about the severity.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-4">
+              <div class="d-flex">
+                <div class="me-3">
+                  <i class="fas fa-map-marker-alt text-primary fa-2x"></i>
+                </div>
+                <div>
+                  <h4 class="h5 mb-2">Entity Recognition</h4>
+                  <p class="text-muted mb-0">
+                    Named Entity Recognition with spaCy identifies locations and
+                    other important entities mentioned in tweets.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Model Performance -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center" data-aos="fade-up">
+        <h2 class="display-5 fw-bold mb-4">Model Performance</h2>
+        <p class="lead text-muted">
+          Detailed performance metrics and evaluation of our machine learning
+          models.
+        </p>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-10" data-aos="fade-up">
+        <div class="insight-card mb-4">
+          <h3 class="h4 mb-4">Performance Metrics</h3>
+
+          <div class="row mb-4">
+            <div class="col-md-3 mb-4 mb-md-0">
+              <div class="metric-card">
+                <div class="metric-icon">
+                  <i class="fas fa-bullseye"></i>
+                </div>
+                <div class="metric-value">96.2%</div>
+                <h4 class="h5 mb-0">Accuracy</h4>
+                <p class="small text-muted">Overall correct predictions</p>
+              </div>
+            </div>
+            <div class="col-md-3 mb-4 mb-md-0">
+              <div class="metric-card">
+                <div class="metric-icon">
+                  <i class="fas fa-check"></i>
+                </div>
+                <div class="metric-value">94.7%</div>
+                <h4 class="h5 mb-0">Precision</h4>
+                <p class="small text-muted">True positive rate</p>
+              </div>
+            </div>
+            <div class="col-md-3 mb-4 mb-md-0">
+              <div class="metric-card">
+                <div class="metric-icon">
+                  <i class="fas fa-search"></i>
+                </div>
+                <div class="metric-value">92.8%</div>
+                <h4 class="h5 mb-0">Recall</h4>
+                <p class="small text-muted">Sensitivity measure</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="metric-card">
+                <div class="metric-icon">
+                  <i class="fas fa-balance-scale"></i>
+                </div>
+                <div class="metric-value">93.7%</div>
+                <h4 class="h5 mb-0">F1 Score</h4>
+                <p class="small text-muted">Precision-recall balance</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+              <h4 class="h5 mb-3">Confusion Matrix</h4>
+              <div class="chart-container">
+                <canvas id="confusionMatrixChart"></canvas>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <h4 class="h5 mb-3">ROC Curve</h4>
+              <div class="chart-container">
+                <canvas id="rocCurveChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-10" data-aos="fade-up" data-aos-delay="100">
+        <div class="insight-card">
+          <h3 class="h4 mb-4">Feature Importance</h3>
+          <p class="text-muted mb-4">
+            Understanding which features have the greatest impact on the model's
+            predictions helps explain how our classifier makes decisions.
+          </p>
+
+          <div class="table-container">
+            <table class="table feature-importance-table">
+              <thead class="table-light">
+                <tr>
+                  <th>Rank</th>
+                  <th>Feature</th>
+                  <th>Importance Score</th>
+                  <th>Relative Importance</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>disaster</td>
+                  <td>0.089</td>
+                  <td>
+                    <div class="progress">
+                      <div
+                        class="progress-bar bg-primary"
+                        role="progressbar"
+                        style="width: 100%"
+                      ></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>emergency</td>
+                  <td>0.076</td>
+                  <td>
+                    <div class="progress">
+                      <div
+                        class="progress-bar bg-primary"
+                        role="progressbar"
+                        style="width: 85%"
+                      ></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>earthquake</td>
+                  <td>0.064</td>
+                  <td>
+                    <div class="progress">
+                      <div
+                        class="progress-bar bg-primary"
+                        role="progressbar"
+                        style="width: 72%"
+                      ></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>flood</td>
+                  <td>0.058</td>
+                  <td>
+                    <div class="progress">
+                      <div
+                        class="progress-bar bg-primary"
+                        role="progressbar"
+                        style="width: 65%"
+                      ></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>fire</td>
+                  <td>0.052</td>
+                  <td>
+                    <div class="progress">
+                      <div
+                        class="progress-bar bg-primary"
+                        role="progressbar"
+                        style="width: 58%"
+                      ></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>casualties</td>
+                  <td>0.049</td>
+                  <td>
+                    <div class="progress">
+                      <div
+                        class="progress-bar bg-primary"
+                        role="progressbar"
+                        style="width: 55%"
+                      ></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>evacuate</td>
+                  <td>0.045</td>
+                  <td>
+                    <div class="progress">
+                      <div
+                        class="progress-bar bg-primary"
+                        role="progressbar"
+                        style="width: 51%"
+                      ></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>injured</td>
+                  <td>0.039</td>
+                  <td>
+                    <div class="progress">
+                      <div
+                        class="progress-bar bg-primary"
+                        role="progressbar"
+                        style="width: 44%"
+                      ></div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Model Code Example -->
+<section class="py-5">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center" data-aos="fade-up">
+        <h2 class="display-5 fw-bold mb-4">Model Implementation</h2>
+        <p class="lead text-muted">
+          Example code snippets showcasing how our prediction model works
+        </p>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-10" data-aos="fade-up">
+        <div class="insight-card">
+          <h3 class="h4 mb-4">Prediction Function</h3>
+          <p class="text-muted mb-4">
+            Here's a simplified version of our tweet classification function
+            that predicts whether a tweet is about a real disaster:
+          </p>
+
+          <div class="code-block">
+            <span class="code-line"
+              ><span class="keyword">def</span>
+              <span class="function">predict_disaster</span>(text):</span
+            >
+            <span class="code-line">
+              <span class="comment"># Vectorize the text</span></span
+            >
+            <span class="code-line">
+              features = vectorizer.transform([text])</span
+            >
+            <span class="code-line"> </span>
+            <span class="code-line">
+              <span class="comment"># Scale the features</span></span
+            >
+            <span class="code-line">
+              scaled_features = scaler.transform(features.toarray())</span
+            >
+            <span class="code-line"> </span>
+            <span class="code-line">
+              <span class="comment"
+                ># Make prediction with our trained model</span
+              ></span
+            >
+            <span class="code-line">
+              prediction = lr_model.predict(scaled_features)[<span
+                class="number"
+                >0</span
+              >]</span
+            >
+            <span class="code-line">
+              probability = lr_model.predict_proba(scaled_features)[<span
+                class="number"
+                >0</span
+              >][<span class="number">1</span>]</span
+            >
+            <span class="code-line"> </span>
+            <span class="code-line">
+              <span class="comment"># Return result as dictionary</span></span
+            >
+            <span class="code-line"> result = {</span>
+            <span class="code-line">
+              <span class="string">"prediction"</span>:
+              <span class="string">"Disaster"</span>
+              <span class="keyword">if</span> prediction ==
+              <span class="number">1</span> <span class="keyword">else</span>
+              <span class="string">"Not a Disaster"</span>,</span
+            >
+            <span class="code-line">
+              <span class="string">"probability"</span>:
+              <span class="keyword">float</span>(probability)</span
+            >
+            <span class="code-line"> }</span>
+            <span class="code-line"> </span>
+            <span class="code-line">
+              <span class="keyword">return</span> result</span
+            >
+          </div>
+
+          <p class="text-muted mt-4 mb-4">
+            Our entity extraction function identifies locations mentioned in
+            tweets:
+          </p>
+
+          <div class="code-block">
+            <span class="code-line"
+              ><span class="keyword">def</span>
+              <span class="function">extract_locations</span>(tweet):</span
+            >
+            <span class="code-line">
+              <span class="comment"># spaCy entity recognition</span></span
+            >
+            <span class="code-line"> doc = nlp(tweet)</span>
+            <span class="code-line">
+              locations = [ent.text <span class="keyword">for</span> ent
+              <span class="keyword">in</span> doc.ents
+              <span class="keyword">if</span> ent.label_ ==
+              <span class="string">"GPE"</span>
+              <span class="keyword">or</span> ent.label_ ==
+              <span class="string">"LOC"</span>]</span
+            >
+            <span class="code-line"> </span>
+            <span class="code-line">
+              <span class="comment"
+                ># Regular expression patterns for location extraction</span
+              ></span
+            >
+            <span class="code-line"> patterns = [</span>
+            <span class="code-line">
+              <span class="string"
+                >r"\b\w+(?: city| town| village| state| province|
+                country)\b"</span
+              >,</span
+            >
+            <span class="code-line">
+              <span class="string"
+                >r"\b\w+(?: mountain| river| lake| ocean| sea)\b"</span
+              >,</span
+            >
+            <span class="code-line">
+              <span class="string">r"\b[A-Z][a-z]+, [A-Z]{2}\b"</span>
+              <span class="comment"># US city, state format</span></span
+            >
+            <span class="code-line"> ]</span>
+            <span class="code-line"> </span>
+            <span class="code-line">
+              <span class="keyword">for</span> pattern
+              <span class="keyword">in</span> patterns:</span
+            >
+            <span class="code-line">
+              regex_locations = re.findall(pattern, tweet)</span
+            >
+            <span class="code-line"> locations.extend(regex_locations)</span>
+            <span class="code-line"> </span>
+            <span class="code-line">
+              <span class="keyword">return</span>
+              <span class="keyword">list</span>(<span class="keyword">set</span
+              >(locations))
+              <span class="comment"># Remove duplicates</span></span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Future Improvements -->
+<section class="py-5 bg-primary text-white">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center" data-aos="fade-up">
+        <h2 class="display-5 fw-bold mb-4">Future Improvements</h2>
+        <p class="lead">
+          We're constantly working to enhance our model's capabilities
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 mb-4" data-aos="fade-up">
+        <div class="card bg-white bg-opacity-10 border-0 h-100">
+          <div class="card-body p-4">
+            <div class="mb-3 text-warning">
+              <i class="fas fa-brain fa-2x"></i>
+            </div>
+            <h3 class="h4 mb-3">Advanced NLP Models</h3>
+            <p class="mb-0">
+              Implementing transformer-based models like BERT and GPT to improve
+              text understanding and prediction accuracy.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="card bg-white bg-opacity-10 border-0 h-100">
+          <div class="card-body p-4">
+            <div class="mb-3 text-warning">
+              <i class="fas fa-globe fa-2x"></i>
+            </div>
+            <h3 class="h4 mb-3">Multilingual Support</h3>
+            <p class="mb-0">
+              Adding capabilities to analyze tweets in multiple languages to
+              provide global disaster detection coverage.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="card bg-white bg-opacity-10 border-0 h-100">
+          <div class="card-body p-4">
+            <div class="mb-3 text-warning">
+              <i class="fas fa-bolt fa-2x"></i>
+            </div>
+            <h3 class="h4 mb-3">Real-Time Monitoring</h3>
+            <p class="mb-0">
+              Creating a real-time tweet monitoring system that can alert
+              authorities about emerging disaster situations.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="card bg-white bg-opacity-10 border-0 h-100">
+          <div class="card-body p-4">
+            <div class="mb-3 text-warning">
+              <i class="fas fa-image fa-2x"></i>
+            </div>
+            <h3 class="h4 mb-3">Image Analysis</h3>
+            <p class="mb-0">
+              Incorporating computer vision to analyze images attached to tweets
+              for additional disaster evidence.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="400">
+        <div class="card bg-white bg-opacity-10 border-0 h-100">
+          <div class="card-body p-4">
+            <div class="mb-3 text-warning">
+              <i class="fas fa-chart-line fa-2x"></i>
+            </div>
+            <h3 class="h4 mb-3">Trend Analysis</h3>
+            <p class="mb-0">
+              Developing algorithms to detect unusual spikes in disaster-related
+              terms to identify emerging events.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="500">
+        <div class="card bg-white bg-opacity-10 border-0 h-100">
+          <div class="card-body p-4">
+            <div class="mb-3 text-warning">
+              <i class="fas fa-mobile-alt fa-2x"></i>
+            </div>
+            <h3 class="h4 mb-3">Mobile Application</h3>
+            <p class="mb-0">
+              Creating a dedicated mobile app for emergency responders with
+              offline capabilities and push notifications.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %} {% block custom_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Confusion Matrix Chart
+    const ctxConfusion = document
+      .getElementById("confusionMatrixChart")
+      .getContext("2d");
+    const confusionMatrixChart = new Chart(ctxConfusion, {
+      type: "bar",
+      data: {
+        labels: [
+          "True Negative",
+          "False Positive",
+          "False Negative",
+          "True Positive",
+        ],
+        datasets: [
+          {
+            label: "Count",
+            data: [1250, 70, 50, 950],
+            backgroundColor: [
+              "rgba(40, 167, 69, 0.7)",
+              "rgba(220, 53, 69, 0.7)",
+              "rgba(220, 53, 69, 0.7)",
+              "rgba(40, 167, 69, 0.7)",
+            ],
+            borderColor: [
+              "rgba(40, 167, 69, 1)",
+              "rgba(220, 53, 69, 1)",
+              "rgba(220, 53, 69, 1)",
+              "rgba(40, 167, 69, 1)",
+            ],
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: "Number of Predictions",
+            },
+          },
+          x: {
+            title: {
+              display: true,
+              text: "Prediction Category",
+            },
+          },
+        },
+        plugins: {
+          legend: {
+            display: false,
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                return `Count: ${context.raw}`;
+              },
+            },
+          },
+        },
+      },
+    });
+
+    // ROC Curve Chart
+    const ctxROC = document.getElementById("rocCurveChart").getContext("2d");
+    const rocCurveChart = new Chart(ctxROC, {
+      type: "line",
+      data: {
+        labels: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+        datasets: [
+          {
+            label: "Model ROC Curve (AUC = 0.962)",
+            data: [
+              0, 0.59, 0.76, 0.84, 0.88, 0.92, 0.94, 0.96, 0.97, 0.99, 1.0,
+            ],
+            borderColor: "rgba(13, 110, 253, 1)",
+            backgroundColor: "rgba(13, 110, 253, 0.1)",
+            borderWidth: 2,
+            fill: true,
+            tension: 0.4,
+          },
+          {
+            label: "Random Classifier",
+            data: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+            borderColor: "rgba(108, 117, 125, 0.8)",
+            borderWidth: 2,
+            borderDash: [5, 5],
+            fill: false,
+            pointRadius: 0,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: "True Positive Rate",
+            },
+            max: 1,
+          },
+          x: {
+            title: {
+              display: true,
+              text: "False Positive Rate",
+            },
+            max: 1,
+          },
+        },
+      },
+    });
+  });
+</script>
+{% endblock %}

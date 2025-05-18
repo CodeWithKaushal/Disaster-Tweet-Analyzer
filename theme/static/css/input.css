@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS beyond Tailwind */
+.text-disaster {
+  color: #e53e3e;
+}
+
+.text-safe {
+  color: #38a169;
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

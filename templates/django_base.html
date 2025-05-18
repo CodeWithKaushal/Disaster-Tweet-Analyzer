@@ -1,0 +1,237 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Disaster Tweet Analyzer{% endblock %}</title>
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome 6 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Animate.css -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    {% block custom_css %}{% endblock %}
+  </head>
+  <body class="{% block body_class %}{% endblock %}">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container">
+        <a
+          class="navbar-brand d-flex align-items-center"
+          href="{% url 'index' %}"
+        >
+          <img
+            src="{% static 'images/logo.png' %}"
+            alt="Disaster Tweet Analyzer Logo"
+            height="40"
+          />
+          <span class="ms-2 brand-text">Disaster Tweet Analyzer</span>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.path == '/' %}active{% endif %}"
+                href="{% url 'index' %}"
+              >
+                <i class="fas fa-home"></i> Home
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.path == '/model-insight/' %}active{% endif %}"
+                href="{% url 'model-insight' %}"
+              >
+                <i class="fas fa-brain"></i> Model Insights
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.path == '/motivation/' %}active{% endif %}"
+                href="{% url 'motivation' %}"
+              >
+                <i class="fas fa-rocket"></i> Motivation
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.path == '/team/' %}active{% endif %}"
+                href="{% url 'team' %}"
+              >
+                <i class="fas fa-users"></i> Our Team
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.path == '/about-us/' %}active{% endif %}"
+                href="{% url 'about-us' %}"
+              >
+                <i class="fas fa-info-circle"></i> About Us
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.path == '/feedback/' %}active{% endif %}"
+                href="{% url 'feedback' %}"
+              >
+                <i class="fas fa-comment-dots"></i> Feedback
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>{% block content %}{% endblock %}</main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 mb-4 mb-md-0">
+            <h5 class="mb-3 footer-heading">About the Project</h5>
+            <p>
+              Disaster Tweet Analyzer is an advanced AI-powered tool that helps
+              identify and analyze disaster-related tweets to assist emergency
+              response teams.
+            </p>
+            <div class="social-icons mt-3">
+              <a href="#" class="me-2"
+                ><i class="fab fa-github fa-fw fa-lg"></i
+              ></a>
+              <a href="#" class="me-2"
+                ><i class="fab fa-linkedin fa-fw fa-lg"></i
+              ></a>
+              <a href="#" class="me-2"
+                ><i class="fab fa-twitter fa-fw fa-lg"></i
+              ></a>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4 mb-md-0">
+            <h5 class="mb-3 footer-heading">Quick Links</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a href="{% url 'index' %}" class="footer-link"
+                  ><i class="fas fa-chevron-right me-1"></i>Home</a
+                >
+              </li>
+              <li>
+                <a href="{% url 'model-insight' %}" class="footer-link"
+                  ><i class="fas fa-chevron-right me-1"></i>Model Insights</a
+                >
+              </li>
+              <li>
+                <a href="{% url 'motivation' %}" class="footer-link"
+                  ><i class="fas fa-chevron-right me-1"></i>Motivation</a
+                >
+              </li>
+              <li>
+                <a href="{% url 'team' %}" class="footer-link"
+                  ><i class="fas fa-chevron-right me-1"></i>Our Team</a
+                >
+              </li>
+              <li>
+                <a href="{% url 'about-us' %}" class="footer-link"
+                  ><i class="fas fa-chevron-right me-1"></i>About Us</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h5 class="mb-3 footer-heading">Contact Us</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2">
+                <i class="fas fa-envelope fa-fw me-2"></i>
+                info@disastertweetanalyzer.com
+              </li>
+              <li class="mb-2">
+                <i class="fas fa-phone fa-fw me-2"></i> +1 (123) 456-7890
+              </li>
+              <li>
+                <i class="fas fa-map-marker-alt fa-fw me-2"></i> Main Street,
+                New York, NY 10001
+              </li>
+            </ul>
+          </div>
+        </div>
+        <hr class="mt-4 mb-4 bg-light" />
+        <div class="row">
+          <div class="col-md-6 text-center text-md-start">
+            <p class="mb-md-0">
+              &copy; {% now "Y" %} Disaster Tweet Analyzer. All Rights Reserved.
+            </p>
+          </div>
+          <div class="col-md-6 text-center text-md-end">
+            <p class="mb-0">
+              Designed with <i class="fas fa-heart text-danger"></i> by Team 3
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom JS -->
+    <script src="{% static 'js/main.js' %}"></script>
+    <script>
+      // Initialize AOS animations
+      AOS.init({
+        duration: 800,
+        easing: "ease-in-out",
+        once: true,
+      });
+
+      // Navbar scrolling effect
+      document.addEventListener("DOMContentLoaded", function () {
+        const navbar = document.querySelector(".navbar");
+
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 50) {
+            navbar.classList.add("navbar-scrolled");
+          } else {
+            navbar.classList.remove("navbar-scrolled");
+          }
+        });
+      });
+    </script>
+    {% block custom_js %}{% endblock %}
+  </body>
+</html>

@@ -1,0 +1,289 @@
+{% extends "base.html" %} {% block title %}About Us - Disaster Tweet Analyzer{%
+endblock %} {% block custom_css %}
+<style>
+  .about-section {
+    padding: 60px 0;
+  }
+
+  .content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .card {
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+  }
+
+  .dark-mode .card {
+    background-color: #2d2d2d;
+  }
+
+  .card h2 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
+
+  .card p {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .dark-mode .card p {
+    color: var(--light-text-color);
+  }
+
+  .title {
+    text-align: center;
+    margin-bottom: 50px;
+    color: var(--primary-color);
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+  }
+
+  .title:after {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 4px;
+    background-color: var(--accent-color);
+    bottom: -10px;
+    left: 25%;
+  }
+
+  .hero-banner {
+    background: linear-gradient(
+      135deg,
+      var(--primary-color),
+      var(--secondary-color)
+    );
+    color: white;
+    padding: 60px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-banner::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: url("{{ url_for("static", filename="images/image1.jpg") }}")
+      center center/cover;
+    opacity: 0.2;
+    z-index: 0;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .icon-box {
+    text-align: center;
+    padding: 30px 20px;
+    border-radius: var(--border-radius);
+    background-color: white;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    margin-bottom: 30px;
+  }
+
+  .dark-mode .icon-box {
+    background-color: #2d2d2d;
+  }
+
+  .icon-box:hover {
+    transform: translateY(-10px);
+  }
+
+  .icon-box i {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+  }
+
+  .icon-box h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
+
+  .team-section {
+    background-color: #f9f9f9;
+    padding: 60px 0;
+  }
+
+  .dark-mode .team-section {
+    background-color: #1e1e1e;
+  }
+</style>
+{% endblock %} {% block main_class %}{% endblock %} {% block content %}
+<!-- Hero Banner -->
+<section class="hero-banner">
+  <div class="container hero-content">
+    <div class="row">
+      <div class="col-lg-8 mx-auto text-center">
+        <h1 class="display-4 fw-bold">About Our Project</h1>
+        <p class="lead">
+          We're a team of interns at Springboard Infosys, dedicated to enhancing
+          disaster preparedness and response through innovative data analysis
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 mx-auto text-center mb-5">
+        <h2 class="title">WHO WE ARE</h2>
+        <p class="lead">
+          We are passionate about leveraging technology to make a difference in
+          disaster management. Our project combines machine learning, data
+          analysis, and social media monitoring to provide valuable insights for
+          disaster response teams.
+        </p>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3">
+        <div class="icon-box">
+          <i class="fas fa-users"></i>
+          <h3>Our Team</h3>
+          <p>
+            A dedicated group of interns guided by our mentor, Nitig Singh,
+            working collaboratively to make a difference.
+          </p>
+          <a href="/team" class="btn btn-outline-primary mt-3">Meet The Team</a>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="icon-box">
+          <i class="fas fa-bullseye"></i>
+          <h3>Our Mission</h3>
+          <p>
+            Leveraging historical data to provide insights that help communities
+            and responders prepare for disasters.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="icon-box">
+          <i class="fas fa-microchip"></i>
+          <h3>Technology</h3>
+          <p>
+            Using machine learning and natural language processing to analyze
+            social media data and extract meaningful insights.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="icon-box">
+          <i class="fas fa-lightbulb"></i>
+          <h3>Our Vision</h3>
+          <p>
+            Enhancing community resilience and preparedness by learning from
+            past events to improve future disaster response.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="team-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 mx-auto text-center mb-5">
+        <h2 class="title">OUR APPROACH</h2>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h2>Data-Driven Analysis</h2>
+            <p>
+              Our project utilizes sophisticated data analysis techniques to
+              extract valuable insights from disaster-related tweets. By
+              analyzing patterns, sentiments, and locations mentioned in social
+              media content, we provide a comprehensive understanding of how
+              disasters unfold in real-time through public communication
+              channels.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h2>Machine Learning Implementation</h2>
+            <p>
+              We've developed advanced machine learning models that can
+              accurately classify tweets as disaster-related or not, identify
+              the type of disaster being discussed, extract location
+              information, and analyze the sentiment of the message. This
+              multi-faceted approach provides emergency responders with critical
+              information during crisis situations.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h2>Collaborative Development</h2>
+            <p>
+              Our team works collaboratively, with each member bringing unique
+              perspectives and skills to the project. We've structured our work
+              to leverage individual strengths while maintaining a cohesive
+              vision. This collaborative approach has allowed us to develop a
+              comprehensive solution that addresses multiple aspects of disaster
+              communication analysis.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h2>Continuous Improvement</h2>
+            <p>
+              We believe in the power of iteration and continuous improvement.
+              Our models are regularly refined based on new data and feedback.
+              This commitment to ongoing development ensures that our disaster
+              prediction capabilities become increasingly accurate and reliable
+              over time, providing better support for emergency response
+              efforts.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,594 @@
+{% extends "django_base.html" %} {% load static %} {% block title %}About Us -
+Disaster Tweet Analyzer{% endblock %} {% block custom_css %}
+<style>
+  .page-header {
+    background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.7),
+        rgba(0, 0, 0, 0.5)
+      ),
+      url('{% static "images/image2.jpg" %}');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 120px 0 80px;
+    margin-top: -76px;
+  }
+
+  .about-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    padding: 40px;
+    margin-bottom: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .about-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  }
+
+  .timeline {
+    position: relative;
+    padding: 0;
+    list-style: none;
+    margin-top: 40px;
+  }
+
+  .timeline:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    margin-left: -2px;
+    background-color: #e9ecef;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 40px;
+    min-height: 50px;
+  }
+
+  .timeline-badge {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    left: 50%;
+    margin-left: -25px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 1.4em;
+    line-height: 50px;
+    background: linear-gradient(to right, #0062e6, #33aeff);
+    color: #fff;
+    z-index: 100;
+  }
+
+  .timeline-panel {
+    width: 46%;
+    float: left;
+    position: relative;
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .timeline-panel:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .timeline-item:nth-child(even) .timeline-panel {
+    float: right;
+  }
+
+  .timeline-panel::after {
+    position: absolute;
+    top: 20px;
+    right: -15px;
+    display: inline-block;
+    border-top: 15px solid transparent;
+    border-left: 15px solid #fff;
+    border-right: 0 solid #fff;
+    border-bottom: 15px solid transparent;
+    content: " ";
+  }
+
+  .timeline-item:nth-child(even) .timeline-panel::after {
+    border-left-width: 0;
+    border-right-width: 15px;
+    left: -15px;
+    right: auto;
+    border-right-color: #fff;
+  }
+
+  .timeline-title {
+    margin-top: 0;
+    color: inherit;
+  }
+
+  .timeline-body > p,
+  .timeline-body > ul {
+    margin-bottom: 0;
+  }
+
+  .tech-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border-radius: 50px;
+    background-color: #f8f9fa;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-weight: 500;
+  }
+
+  .tech-badge:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .tech-badge i {
+    margin-right: 8px;
+  }
+
+  .video-container {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (max-width: 767px) {
+    .timeline:before {
+      left: 40px;
+    }
+
+    .timeline-badge {
+      left: 40px;
+      margin-left: 0;
+    }
+
+    .timeline-panel {
+      width: calc(100% - 90px);
+      width: -moz-calc(100% - 90px);
+      width: -webkit-calc(100% - 90px);
+      float: right !important;
+      margin-left: 90px;
+    }
+
+    .timeline-item:nth-child(even) .timeline-panel::after {
+      border-left-width: 15px;
+      border-right-width: 0;
+      left: auto;
+      right: -15px;
+      border-right-color: transparent;
+      border-left-color: #fff;
+    }
+  }
+</style>
+{% endblock %} {% block content %}
+<!-- Page Header -->
+<section class="page-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto text-center">
+        <h1 class="display-4 fw-bold mb-4">About Our Project</h1>
+        <p class="lead mb-0">
+          Leveraging AI to detect and analyze disaster-related tweets for better
+          emergency response.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Project Overview -->
+<section class="py-5">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center" data-aos="fade-up">
+        <h2 class="display-5 fw-bold mb-4">Project Overview</h2>
+        <p class="lead text-muted">
+          The Disaster Tweet Analyzer is an AI-powered application that helps
+          identify emergency situations from social media content.
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6 mb-4" data-aos="fade-up">
+        <div class="about-card h-100">
+          <div class="d-flex align-items-center mb-4">
+            <div class="me-4">
+              <span class="fa-stack fa-2x">
+                <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                <i class="fas fa-lightbulb fa-stack-1x fa-inverse"></i>
+              </span>
+            </div>
+            <h3 class="h4 mb-0">Our Mission</h3>
+          </div>
+          <p class="text-muted mb-0">
+            To leverage artificial intelligence and natural language processing
+            to quickly identify disaster-related information from social media,
+            helping emergency responders save lives and allocate resources more
+            efficiently during crisis situations.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="about-card h-100">
+          <div class="d-flex align-items-center mb-4">
+            <div class="me-4">
+              <span class="fa-stack fa-2x">
+                <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                <i class="fas fa-bullseye fa-stack-1x fa-inverse"></i>
+              </span>
+            </div>
+            <h3 class="h4 mb-0">Our Goals</h3>
+          </div>
+          <ul class="text-muted">
+            <li class="mb-2">
+              Achieve high accuracy in detecting disaster-related tweets
+            </li>
+            <li class="mb-2">
+              Extract valuable insights such as location and disaster type
+            </li>
+            <li class="mb-2">
+              Provide sentiment analysis to gauge the severity and public
+              reaction
+            </li>
+            <li class="mb-2">
+              Create an accessible, user-friendly interface for all users
+            </li>
+            <li>
+              Develop an API for integration with emergency response systems
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-lg-12 mb-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="about-card">
+          <div class="d-flex align-items-center mb-4">
+            <div class="me-4">
+              <span class="fa-stack fa-2x">
+                <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                <i class="fas fa-question fa-stack-1x fa-inverse"></i>
+              </span>
+            </div>
+            <h3 class="h4 mb-0">Why It Matters</h3>
+          </div>
+          <p class="text-muted mb-4">
+            During disasters, every minute counts. Social media has become a
+            crucial source of real-time information during emergencies, but the
+            volume of content makes it difficult to manually filter and identify
+            critical information. Our AI solution helps process this data
+            efficiently by:
+          </p>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="d-flex mb-3">
+                <div class="me-3 text-primary">
+                  <i class="fas fa-check-circle fa-lg"></i>
+                </div>
+                <p class="mb-0">
+                  Reducing the time needed to identify disaster situations
+                </p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="d-flex mb-3">
+                <div class="me-3 text-primary">
+                  <i class="fas fa-check-circle fa-lg"></i>
+                </div>
+                <p class="mb-0">
+                  Providing accurate classification of disaster types
+                </p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="d-flex mb-3">
+                <div class="me-3 text-primary">
+                  <i class="fas fa-check-circle fa-lg"></i>
+                </div>
+                <p class="mb-0">
+                  Extracting location data to pinpoint affected areas
+                </p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="d-flex mb-3">
+                <div class="me-3 text-primary">
+                  <i class="fas fa-check-circle fa-lg"></i>
+                </div>
+                <p class="mb-0">
+                  Analyzing sentiment to gauge the severity and urgency
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Video Section -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center mb-5" data-aos="fade-up">
+        <h2 class="display-5 fw-bold mb-4">See It In Action</h2>
+        <p class="lead text-muted mb-0">
+          Watch a brief demonstration of how our Disaster Tweet Analyzer works.
+        </p>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-10" data-aos="zoom-in">
+        <div class="video-container">
+          <video class="img-fluid rounded" controls width="100%">
+            <source src="{% static 'GIFS/about-us.mp4' %}" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Project Timeline -->
+<section class="py-5">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center" data-aos="fade-up">
+        <h2 class="display-5 fw-bold mb-4">Project Timeline</h2>
+        <p class="lead text-muted">The journey from idea to implementation</p>
+      </div>
+    </div>
+
+    <ul class="timeline">
+      <li class="timeline-item clearfix" data-aos="fade-right">
+        <div class="timeline-badge">
+          <i class="fas fa-lightbulb"></i>
+        </div>
+        <div class="timeline-panel">
+          <div class="timeline-heading">
+            <h4 class="timeline-title">Project Conception</h4>
+            <p>
+              <small class="text-muted"
+                ><i class="fas fa-clock"></i> January 2025</small
+              >
+            </p>
+          </div>
+          <div class="timeline-body">
+            <p>
+              Identified the need for automated disaster detection from social
+              media during emergency situations. Initial research and project
+              planning phase.
+            </p>
+          </div>
+        </div>
+      </li>
+      <li class="timeline-item clearfix" data-aos="fade-left">
+        <div class="timeline-badge">
+          <i class="fas fa-database"></i>
+        </div>
+        <div class="timeline-panel">
+          <div class="timeline-heading">
+            <h4 class="timeline-title">Data Collection & Analysis</h4>
+            <p>
+              <small class="text-muted"
+                ><i class="fas fa-clock"></i> February 2025</small
+              >
+            </p>
+          </div>
+          <div class="timeline-body">
+            <p>
+              Collected and analyzed thousands of tweets from various disaster
+              events. Created a labeled dataset for training our machine
+              learning models.
+            </p>
+          </div>
+        </div>
+      </li>
+      <li class="timeline-item clearfix" data-aos="fade-right">
+        <div class="timeline-badge">
+          <i class="fas fa-brain"></i>
+        </div>
+        <div class="timeline-panel">
+          <div class="timeline-heading">
+            <h4 class="timeline-title">Model Development</h4>
+            <p>
+              <small class="text-muted"
+                ><i class="fas fa-clock"></i> March 2025</small
+              >
+            </p>
+          </div>
+          <div class="timeline-body">
+            <p>
+              Trained and tested multiple machine learning models. Implemented
+              and fine-tuned a Logistic Regression and Random Forest classifier
+              with additional NLP features.
+            </p>
+          </div>
+        </div>
+      </li>
+      <li class="timeline-item clearfix" data-aos="fade-left">
+        <div class="timeline-badge">
+          <i class="fas fa-laptop-code"></i>
+        </div>
+        <div class="timeline-panel">
+          <div class="timeline-heading">
+            <h4 class="timeline-title">UI Development</h4>
+            <p>
+              <small class="text-muted"
+                ><i class="fas fa-clock"></i> April 2025</small
+              >
+            </p>
+          </div>
+          <div class="timeline-body">
+            <p>
+              Designed and developed the user interface. Created a responsive
+              web application with intuitive features for disaster tweet
+              analysis.
+            </p>
+          </div>
+        </div>
+      </li>
+      <li class="timeline-item clearfix" data-aos="fade-right">
+        <div class="timeline-badge">
+          <i class="fas fa-rocket"></i>
+        </div>
+        <div class="timeline-panel">
+          <div class="timeline-heading">
+            <h4 class="timeline-title">Launch & Future Plans</h4>
+            <p>
+              <small class="text-muted"
+                ><i class="fas fa-clock"></i> May 2025</small
+              >
+            </p>
+          </div>
+          <div class="timeline-body">
+            <p>
+              Official launch of the Disaster Tweet Analyzer. Continuing to
+              improve the model accuracy and working on additional features like
+              real-time monitoring.
+            </p>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- Technologies Used -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center" data-aos="fade-up">
+        <h2 class="display-5 fw-bold mb-4">Technologies Used</h2>
+        <p class="lead text-muted">
+          Our project leverages cutting-edge tools and technologies
+        </p>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="about-card" data-aos="fade-up">
+          <div class="row">
+            <div class="col-lg-6 mb-4">
+              <h3 class="h4 mb-3">Machine Learning & NLP</h3>
+              <div>
+                <span class="tech-badge"
+                  ><i class="fab fa-python text-primary"></i> Python</span
+                >
+                <span class="tech-badge"
+                  ><i class="fas fa-brain text-success"></i> scikit-learn</span
+                >
+                <span class="tech-badge"
+                  ><i class="fas fa-comment text-info"></i> NLTK</span
+                >
+                <span class="tech-badge"
+                  ><i class="fas fa-language text-warning"></i> spaCy</span
+                >
+                <span class="tech-badge"
+                  ><i class="fas fa-file-csv text-danger"></i> Pandas</span
+                >
+                <span class="tech-badge"
+                  ><i class="fas fa-calculator text-secondary"></i> NumPy</span
+                >
+              </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+              <h3 class="h4 mb-3">Web Development</h3>
+              <div>
+                <span class="tech-badge"
+                  ><i class="fab fa-python text-primary"></i> Django</span
+                >
+                <span class="tech-badge"
+                  ><i class="fab fa-html5 text-danger"></i> HTML5</span
+                >
+                <span class="tech-badge"
+                  ><i class="fab fa-css3-alt text-primary"></i> CSS3</span
+                >
+                <span class="tech-badge"
+                  ><i class="fab fa-js text-warning"></i> JavaScript</span
+                >
+                <span class="tech-badge"
+                  ><i class="fab fa-bootstrap text-purple"></i> Bootstrap
+                  5</span
+                >
+              </div>
+            </div>
+            <div class="col-lg-6 mb-4 mb-lg-0">
+              <h3 class="h4 mb-3">Data Visualization</h3>
+              <div>
+                <span class="tech-badge"
+                  ><i class="fas fa-chart-line text-success"></i> Chart.js</span
+                >
+                <span class="tech-badge"
+                  ><i class="fas fa-chart-bar text-primary"></i>
+                  Matplotlib</span
+                >
+                <span class="tech-badge"
+                  ><i class="fas fa-chart-area text-info"></i> Seaborn</span
+                >
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <h3 class="h4 mb-3">Deployment & Tools</h3>
+              <div>
+                <span class="tech-badge"
+                  ><i class="fab fa-github text-dark"></i> GitHub</span
+                >
+                <span class="tech-badge"
+                  ><i class="fas fa-cloud text-info"></i> Heroku</span
+                >
+                <span class="tech-badge"
+                  ><i class="fas fa-terminal text-dark"></i> Git</span
+                >
+                <span class="tech-badge"
+                  ><i class="fas fa-database text-success"></i> SQLite</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team CTA Section -->
+<section class="py-5 bg-primary text-white text-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8" data-aos="fade-up">
+        <h2 class="display-5 fw-bold mb-4">Meet Our Team</h2>
+        <p class="lead mb-4">
+          Get to know the brilliant minds behind the Disaster Tweet Analyzer
+          project.
+        </p>
+        <a
+          href="{% url 'team' %}"
+          class="btn btn-light btn-lg px-5 py-3 rounded-pill"
+        >
+          <i class="fas fa-users me-2"></i>View Team Members
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@700&family=Open+Sans:wght@300&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #0a1a3a; /* Dark blue background */
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  color: whitesmoke;
+}
+
+.title {
+  color: #ffffff;
+  font-family: 'Exo 2', sans-serif;
+  font-size: 48px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.content-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.team-box {
+  background-color: #1e2a47; /* Slightly lighter than background */
+  padding: 60px; /* Increased padding */
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  width: 80%; /* Increased width */
+  max-width: 1200px; /* Added max-width */
+  text-align: center;
+  transition: transform 0.3s, background-color 0.3s;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.team-box:hover {
+  transform: translateY(-10px);
+  background-color: #273556;
+}
+
+.team-box h2 {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 32px;
+  color: #ffcc00; /* Gold color for headings */
+  margin-top: 20px;
+  position: relative;
+  display: inline-block;
+}
+
+.team-box h2::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 4px;
+  background-color: #ffcc00;
+  margin: 10px auto;
+}
+
+.team-box p {
+  font-size: 24px;
+  line-height: 1.6; /* Added line-height */
+  color: #d1d1e0;
+  margin: 20px 0;
+  position: relative;
+  padding: 10px 30px;
+  cursor: pointer;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+.team-box p::before {
+  content: '\f19d';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  position: absolute;
+  left: -35px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ffcc00;
+}
+
+.team-box p:hover {
+  color: #ffcc00;
+  background-color: rgba(255, 204, 0, 0.1);
+}
+
+.team-box ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 30px;
+}
+
+.team-box li {
+  font-size: 20px;
+  line-height: 1.6; /* Added line-height */
+  margin: 10px 0;
+  position: relative;
+  padding: 10px 30px;
+  cursor: pointer;
+  transition: color 0.3s, background-color 0.3s;
+  color: #d1d1e0;
+}
+
+.team-box li::before {
+  content: '\f007';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  position: absolute;
+  left: -35px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ffcc00;
+}
+
+.team-box li:hover {
+  color: #ffcc00;
+  background-color: rgba(255, 204, 0, 0.1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

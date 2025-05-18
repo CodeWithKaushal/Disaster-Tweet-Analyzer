@@ -1,0 +1,348 @@
+{% extends "base.html" %} {% block title %}Our Team - Disaster Tweet Analyzer{%
+endblock %} {% block custom_css %}
+<style>
+  .team-section {
+    padding: 80px 0;
+  }
+
+  .team-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .team-header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+  }
+
+  .team-header p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .team-category {
+    margin-bottom: 60px;
+  }
+
+  .team-category-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: var(--primary-color);
+    position: relative;
+    display: inline-block;
+  }
+
+  .team-category-title:after {
+    content: "";
+    position: absolute;
+    width: 70%;
+    height: 3px;
+    background-color: var(--accent-color);
+    bottom: -10px;
+    left: 15%;
+  }
+
+  .mentor-card {
+    text-align: center;
+    padding: 30px;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    max-width: 300px;
+    margin: 0 auto 40px;
+  }
+
+  .dark-mode .mentor-card {
+    background-color: #2d2d2d;
+  }
+
+  .mentor-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+  }
+
+  .mentor-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 20px;
+    border: 5px solid var(--primary-color);
+  }
+
+  .mentor-name {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .team-members-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+  }
+
+  .team-member {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 15px;
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+  }
+
+  .dark-mode .team-member {
+    background-color: #2d2d2d;
+  }
+
+  .team-member:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  }
+
+  .member-name {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 10px 0 5px;
+  }
+
+  .team-lead {
+    background-color: rgba(26, 115, 232, 0.1);
+    border-left: 4px solid var(--primary-color);
+  }
+
+  .dark-mode .team-lead {
+    background-color: rgba(26, 115, 232, 0.2);
+  }
+</style>
+{% endblock %} {% block content %}
+<section class="team-section">
+  <div class="container">
+    <div class="team-header">
+      <h1>Our Amazing Team</h1>
+      <p class="lead">
+        Meet the talented individuals behind the Disaster Tweet Analyzer
+        project. Our diverse team combines expertise in machine learning, data
+        analysis, and software development.
+      </p>
+    </div>
+
+    <div class="team-category">
+      <h2 class="team-category-title mx-auto">Our Mentor</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-4">
+          <div class="mentor-card">
+            <div
+              class="mentor-img-placeholder"
+              style="
+                background-color: #e9ecef;
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+                margin: 0 auto 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <i
+                class="fas fa-user"
+                style="font-size: 4rem; color: #adb5bd"
+              ></i>
+            </div>
+            <h3 class="mentor-name">Nitin Singh</h3>
+            <p>Project Mentor and Guide</p>
+            <div class="mentor-social mt-3">
+              <a
+                href="#"
+                class="btn btn-outline-primary btn-sm rounded-circle me-2"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+              <a
+                href="#"
+                class="btn btn-outline-primary btn-sm rounded-circle me-2"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" class="btn btn-outline-primary btn-sm rounded-circle"
+                ><i class="fas fa-envelope"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="team-category">
+      <h2 class="team-category-title mx-auto">Team Leads</h2>
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4">
+          <div class="team-member team-lead">
+            <div
+              class="member-img-placeholder"
+              style="
+                background-color: #e9ecef;
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                margin: 0 auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <i
+                class="fas fa-user"
+                style="font-size: 2rem; color: #adb5bd"
+              ></i>
+            </div>
+            <h4 class="member-name">Ashutosh Kumar Yadav</h4>
+            <p class="member-role">Lead Developer</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4">
+          <div class="team-member team-lead">
+            <div
+              class="member-img-placeholder"
+              style="
+                background-color: #e9ecef;
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                margin: 0 auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <i
+                class="fas fa-user"
+                style="font-size: 2rem; color: #adb5bd"
+              ></i>
+            </div>
+            <h4 class="member-name">Prajakta Tambare</h4>
+            <p class="member-role">Data Science Lead</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4">
+          <div class="team-member team-lead">
+            <div
+              class="member-img-placeholder"
+              style="
+                background-color: #e9ecef;
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                margin: 0 auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <i
+                class="fas fa-user"
+                style="font-size: 2rem; color: #adb5bd"
+              ></i>
+            </div>
+            <h4 class="member-name">Rani Soni</h4>
+            <p class="member-role">ML Engineering Lead</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4">
+          <div class="team-member team-lead">
+            <div
+              class="member-img-placeholder"
+              style="
+                background-color: #e9ecef;
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                margin: 0 auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <i
+                class="fas fa-user"
+                style="font-size: 2rem; color: #adb5bd"
+              ></i>
+            </div>
+            <h4 class="member-name">Vanshika Ganjoo</h4>
+            <p class="member-role">UX/UI Lead</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="team-category">
+      <h2 class="team-category-title mx-auto">Team Members</h2>
+      <div class="team-members-grid">
+        <div class="team-member">
+          <h4 class="member-name">Avanthika Katari</h4>
+        </div>
+        <div class="team-member">
+          <h4 class="member-name">Ayush Gupta</h4>
+        </div>
+        <div class="team-member">
+          <h4 class="member-name">Bustob Sarkar</h4>
+        </div>
+        <div class="team-member">
+          <h4 class="member-name">Deela Neha Reddy Thummuru</h4>
+        </div>
+        <div class="team-member">
+          <h4 class="member-name">Esthak Jerosin</h4>
+        </div>
+        <div class="team-member">
+          <h4 class="member-name">Geetha Reddy</h4>
+        </div>
+        <div class="team-member">
+          <h4 class="member-name">Gurudharshini K</h4>
+        </div>
+        <div class="team-member">
+          <h4 class="member-name">Kanchana Kapparam</h4>
+        </div>
+        <div class="team-member">
+          <h4 class="member-name">Karna Naik</h4>
+        </div>
+        <div class="team-member">
+          <h4 class="member-name">Karthikeya</h4>
+        </div>
+        <div class="team-member">
+          <h4 class="member-name">Kaushal Divekar</h4>
+        </div>
+        <div class="team-member">
+          <h4 class="member-name">Keerthi Swetha</h4>
+        </div>
+        <div class="team-member">
+          <h4 class="member-name">Moksha Kankariya</h4>
+        </div>
+        <div class="team-member">
+          <h4 class="member-name">Mohamed Hanifa B</h4>
+        </div>
+        <div class="team-member">
+          <h4 class="member-name">Rohitha Aiswarya Dora</h4>
+        </div>
+        <div class="team-member">
+          <h4 class="member-name">Shreekar Jukareddy</h4>
+        </div>
+        <div class="team-member">
+          <h4 class="member-name">Shubham Gohil</h4>
+        </div>
+        <div class="team-member">
+          <h4 class="member-name">Sriram .D</h4>
+        </div>
+        <div class="team-member">
+          <h4 class="member-name">YUVA SAI RITHVIK SAJJA</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
