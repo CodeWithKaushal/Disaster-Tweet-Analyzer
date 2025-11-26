@@ -10,18 +10,48 @@ body {
 }
 
 .container {
-  height: 100%;
-  background-color: #003471;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a1a3a 0%, #1e2a47 100%);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: 60px 20px;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #ffcc00;
+  text-decoration: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.3s;
+  font-size: 1.1rem;
+  z-index: 1000;
+}
+
+.back-button:hover {
+  opacity: 0.8;
 }
 
 .title {
-  font-size: 38px;
-  color: #fff;
-  font-weight: 300;
+  font-family: "Exo 2", sans-serif;
+  font-size: 3rem;
+  color: #ffcc00;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #d1d1e0;
+  margin-bottom: 40px;
+  text-align: center;
 }
 
 .timeline {
@@ -92,13 +122,37 @@ body {
 .timeline-slide {
   position: relative;
   overflow: hidden;
-  background-repeat: no-repeat;
-  background-size: cover; /* Ensures the image covers the entire slide */
-  background-position: center; /* Centers the image */
   outline: none;
   margin: 0 24px;
   width: 80%;
   z-index: 1;
+  background: linear-gradient(135deg, #1e2a47 0%, #2a3f5f 100%);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.timeline-slide.disaster-earthquake {
+  background: linear-gradient(135deg, #8b4513 0%, #a0522d 100%);
+}
+
+.timeline-slide.disaster-tsunami {
+  background: linear-gradient(135deg, #1e90ff 0%, #4169e1 100%);
+}
+
+.timeline-slide.disaster-hurricane {
+  background: linear-gradient(135deg, #2f4f4f 0%, #708090 100%);
+}
+
+.timeline-slide.disaster-cyclone {
+  background: linear-gradient(135deg, #483d8b 0%, #6a5acd 100%);
+}
+
+.timeline-slide.disaster-flood {
+  background: linear-gradient(135deg, #4682b4 0%, #5f9ea0 100%);
+}
+
+.timeline-slide.disaster-fire {
+  background: linear-gradient(135deg, #dc143c 0%, #ff6347 100%);
 }
 
 .timeline-slide:after {
@@ -108,7 +162,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 52, 113, 0.8);
+  background-color: rgba(0, 0, 0, 0.3);
   z-index: 2;
 }
 .timeline-slide__content {

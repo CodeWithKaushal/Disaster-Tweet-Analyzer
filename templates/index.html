@@ -22,32 +22,36 @@
       }
 
       body {
-        font-family: Arial, sans-serif;
-        background-color: #e9eff4;
+        font-family: "Open Sans", sans-serif;
+        background: linear-gradient(135deg, #0a1a3a 0%, #1e2a47 100%);
         display: flex;
         flex-direction: column;
         align-items: center;
         min-height: 100vh;
         box-sizing: border-box;
-        overflow: clip;
+        overflow-x: hidden;
+        position: relative;
       }
 
-      .background-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-        height: 100%;
-        width: 100%;
+      body::before {
+        content: "";
         position: absolute;
         top: 0;
         left: 0;
-        z-index: -1;
-      }
-
-      .background-grid img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            circle at 20% 50%,
+            rgba(255, 204, 0, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(30, 42, 71, 0.8) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+        z-index: 0;
       }
 
       /* Logo styles */
@@ -354,14 +358,6 @@
     </style>
   </head>
   <body>
-    <div class="background-grid">
-      <img src="static/images/image1.jpg" alt="Image 1" />
-      <img src="static/images/image2.jpg" alt="Image 2" />
-      <img src="static/images/image3.jpg" alt="Image 3" />
-      <img src="static/images/image4.jpg" alt="Image 4" />
-      <img src="static/images/image5.jpg" alt="Image 5" />
-      <img src="static/images/image6.jpg" alt="Image 6" />
-    </div>
     <!-- Logo positioned at the top left -->
     <div class="logo-container">
       <img src="/static/images/logo.png" alt="Infosys Springboard Logo" />

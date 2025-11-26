@@ -18,10 +18,29 @@ body {
   padding-bottom: 50px;
 }
 
+.back-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  color: #ffcc00;
+  text-decoration: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.3s;
+  font-size: 1.1rem;
+  z-index: 1000;
+}
+
+.back-button:hover {
+  opacity: 0.8;
+}
+
 /* INTRO SECTION */
 .intro {
-  background: #ffcc00; /* Gold yellow for a standout section */
-  padding: 100px 0;
+  background: linear-gradient(135deg, #ffcc00 0%, #ffa500 100%);
+  padding: 80px 0;
 }
 
 .container {
@@ -32,8 +51,17 @@ body {
 }
 
 h1 {
-  font-size: 2.5rem;
-  color: #ffffff;
+  font-family: "Exo 2", sans-serif;
+  font-size: 3rem;
+  color: #0a1a3a;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.intro p {
+  font-size: 1.2rem;
+  color: #1e2a47;
+  font-weight: 500;
 }
 
 /* TIMELINE */
@@ -221,7 +249,7 @@ time {
   }
   100% {
     transform: translateX(-50%) scale(1);
-}
+  }
 }
 
 /* FOOTER STYLES */

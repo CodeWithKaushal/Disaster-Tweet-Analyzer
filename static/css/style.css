@@ -1,25 +1,54 @@
-@import 'https://fonts.googleapis.com/css?family=Montserrat';
-html, body {
+@import "https://fonts.googleapis.com/css?family=Montserrat";
+html,
+body {
   height: 100%;
   width: 100%;
-  background-color: #0a1a3a; /* Dark blue background to match the theme */
+  background: linear-gradient(135deg, #0a1a3a 0%, #1e2a47 100%);
   overflow: hidden;
   color: whitesmoke;
   font-family: "Montserrat", sans-serif;
+  position: relative;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #ffcc00;
+  text-decoration: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.3s;
+  font-size: 1.1rem;
+  z-index: 1000;
+}
+
+.back-button:hover {
+  opacity: 0.8;
 }
 
 .fb-form {
-  width: 300px;
+  width: 380px;
+  max-width: 90%;
   top: 50%;
   left: 50%;
   position: relative;
   transform: translateY(-50%) translateX(-50%);
+  background-color: #1e2a47;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 .fb-form h2 {
   text-align: center;
-  font-size: 1.4em;
-  color: #ffcc00; /* Gold yellow for the heading */
+  font-family: "Exo 2", sans-serif;
+  font-size: 1.8em;
+  color: #ffcc00;
+  margin-bottom: 20px;
+  font-weight: 700;
 }
 
 .fb-form input {
@@ -31,7 +60,7 @@ html, body {
   border-radius: 4px;
 }
 
-.fb-form input[type=submit] {
+.fb-form input[type="submit"] {
   margin-top: 0;
   background-color: #ffcc00; /* Gold yellow for submit button */
   color: #0a1a3a; /* Dark blue text for contrast */
@@ -42,7 +71,7 @@ html, body {
   transition: background-color 0.3s;
 }
 
-.fb-form input[type=submit]:hover {
+.fb-form input[type="submit"]:hover {
   background-color: #e6b800; /* Slightly darker gold for hover effect */
 }
 
@@ -73,7 +102,7 @@ html, body {
   color: #ffcc00; /* Gold yellow for active rating stars */
   transition: all 0.5s ease;
   -webkit-animation: rating-highlight 0.5s ease forwards;
-          animation: rating-highlight 0.5s ease forwards;
+  animation: rating-highlight 0.5s ease forwards;
 }
 
 .rating .fa-star:hover,
