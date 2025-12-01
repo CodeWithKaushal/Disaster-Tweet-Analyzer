@@ -4,8 +4,7 @@ import spacy
 import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import re
-import subprocess
-import sys
+
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
@@ -189,9 +188,15 @@ def load_spacy_model():
     try:
         return spacy.load("en_core_web_sm")
     except OSError:
-        # Fallback if not installed via requirements.txt (though it should be)
-        subprocess.run([sys.executable, "-m", "spacy", "download", "en_core_web_sm"])
-        return spacy.load("en_core_web_sm")
+        # If the model is not found, it might be because the direct URL install failed or wasn't picked up.
+        # In a strict environment, we should fail or try to download, but for Streamlit Cloud with requirements.txt,
+        # it should be there. We'll keep a simplified fallback just in case, or just let it error if it's critical.
+        # For now, let's assume requirements.txt handles it.
+        # If we really need to download at runtime without subprocess (which is blocked), we'd need a different approach,
+        # but spacy.cli.download might also use subprocess.
+        # Let's try to import it as a module if spacy.load fails, though that's rare for this model.
+        import en_core_web_sm
+        return en_core_web_sm.load()
 
 nlp = load_spacy_model()
 
