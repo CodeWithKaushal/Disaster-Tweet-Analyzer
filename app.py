@@ -189,6 +189,7 @@ def load_spacy_model():
     try:
         return spacy.load("en_core_web_sm")
     except OSError:
+        # Fallback if not installed via requirements.txt (though it should be)
         subprocess.run([sys.executable, "-m", "spacy", "download", "en_core_web_sm"])
         return spacy.load("en_core_web_sm")
 
